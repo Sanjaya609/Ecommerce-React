@@ -1,19 +1,24 @@
-.header {
-  position: sticky;
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.navbar{
+  padding: 1rem !important;
+  position: sticky !important;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1;
-  background-color: #282c34;
-  padding: 1rem 1.5rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  font-size: calc(10px + 1vmin);
-  color: white;
 }
-.header .header-right h6 {
-  text-align: right;
-  color: #e2e8f0;
+.navbar-right{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.title-product{
+  color: black;
+  font-size: 2rem;
+}
+.image{
+  max-width: 100%;
 }
