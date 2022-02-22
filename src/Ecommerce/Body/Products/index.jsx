@@ -1,9 +1,7 @@
 import React from 'react'
-import { ProductDisplay } from '../../../Components/ProductDisplay'
+import ProductDisplay from '../../../Components/ProductDisplay'
 
 const Products = ({ products }) => {
-  console.log(products);
-
   return (
     <div className="products">
       <div className="wrapper">

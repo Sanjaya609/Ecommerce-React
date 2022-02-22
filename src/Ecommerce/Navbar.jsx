@@ -2,13 +2,16 @@ import React from 'react'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 import User from '../Resource/User.png'
 
-export const Navbar = () => {
+const Navbar = ({setCartDisplay}) => {
+  const handleCartModal=()=>{
+    setCartDisplay(true);
+  }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-primary" style={{ 'justifyContent': 'space-between' }}>
+    <nav id='navbar' className="navbar navbar-expand-lg navbar-light bg-primary" style={{ 'justifyContent': 'space-between' }}>
       <a className="navbar-brand" href="#" style={{ 'color': 'white', 'paddingLeft': "1rem" }}>Shopmandu</a>
       <div className='col-lg-2 navbar-right'>
         <a href="#" className="Home" style={{ 'textDecoration': 'none', 'color': 'white' }}>Home</a>
-        <HiOutlineShoppingCart style={{ 'height': "30px" }} />
+        <HiOutlineShoppingCart onClick={handleCartModal} style={{ 'height': "30px" }} />
         <img
           src={User}
           className="rounded-circle z-depth-0"
@@ -19,3 +22,4 @@ export const Navbar = () => {
     </nav>
   )
 }
+export default Navbar;

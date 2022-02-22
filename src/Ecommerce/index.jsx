@@ -1,23 +1,56 @@
-import React, { useEffect ,useState} from 'react'
-import { Body } from './Body'
-import { Navbar } from './Navbar'
+import React, { useEffect, useState } from 'react'
+import Body from './Body'
+import Navbar from './Navbar'
 import axios from "axios";
+import Filter from '../Components/Filter';
+import Addtocart from '../Components/Addtocart';
+import dayjs from 'dayjs';
+
+const Ecommerce = () => {
+
+  const [filterModal, setfilterModal] = useState(false);
+  const [cartDisplay, setCartDisplay] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [filteredProduct, setfilteredProduct] = useState([]);
+  //const [itemNumber,setItemNumber]=useState(0);
+
+  const filter = ({ priceMin, priceMax, filterCategory}) => {
+    if (priceMin ===0 &&
+        priceMax === 0 &&
+      filterCategory ==='default'){
+        setfilteredProduct(products);
+    } else {
+      const filteredItems = products.filter((product) => {
+        let price = parseInt(product.price.slice(1));
+        let category = product.category[1];
+        //let date=dayjs(product.date).format("DD-MM-YYYY");
+        //console.log(date);
+        //let minDate= dayjs(dateMin).format("DD-MM-YYYY");
+        console.log(category);
+        let valid = price >= priceMin && price <= priceMax || category === filterCategory/* ||date>=minDate&&date<=dateMax */;
+        console.log(priceMin, priceMax, filterCategory, price, valid);
+        return valid;
+      });
+      setfilteredProduct(filteredItems);
+    }
+  };
 
 
-export const Ecommerce = () => {
-  const [products,setProducts]=useState([]);
   const fetchProducts = async () => {
     const response = await axios.get("https://electronic-ecommerce.herokuapp.com/api/v1/product");
-    console.log(response.data.data.product);
-    if (response?.data&& response.data.status==="success"){
-      setProducts(response.data.data.product||[]);
-    } 
+    if (response?.data && response.data.status === "success") {
+      setProducts(response.data.data.product || []);
+      setfilteredProduct(response.data.data.product);
+    }
   }
   useEffect(() => { fetchProducts(); }, []);
   return (
     <>
-      <Navbar />
-      <Body products={products}/>
+      {filterModal ? <Filter filter={filter} filterModal={filterModal} setfilterModal={setfilterModal} /> : null}
+      {cartDisplay ? <Addtocart cartDisplay={cartDisplay} setCartDisplay={setCartDisplay} /> : null}
+      <Navbar setCartDisplay={setCartDisplay} />
+      <Body setfilterModal={setfilterModal} products={filteredProduct} />
     </>
   )
 }
+export default Ecommerce;
