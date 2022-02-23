@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductDisplay from '../../../Components/ProductDisplay'
 
-const Products = ({ products }) => {
+const Products = ({ products,cartItem,setCartItem}) => {
   return (
     <div className="products">
       <div className="wrapper">
@@ -14,7 +14,10 @@ const Products = ({ products }) => {
                 stock={item.stock}
                 image={item.image}
                 release={item.createDate}
-                key={item.id} />
+                key={item.id}
+                id={item.id} 
+                cartItem={cartItem} 
+                setCartItem={setCartItem}/>
             ))}
           </div>
 

@@ -13,7 +13,15 @@ const Ecommerce = () => {
   const [products, setProducts] = useState([]);
   const [filteredProduct, setfilteredProduct] = useState([]);
   //const [itemNumber,setItemNumber]=useState(0);
+  const [cartItem,setCartItem]=useState([]);
+  const [totalPrice,setTotalPrice]=useState(0);
 
+  const DeleteCartItem=(id)=>{
+    console.log(id);
+    const updatedCartItem= cartItem.filter(item=>item.id!=id);
+    console.log(updatedCartItem);
+    setCartItem(updatedCartItem);
+  }
   const filter = ({ priceMin, priceMax, filterCategory}) => {
     if (priceMin ===0 &&
         priceMax === 0 &&
@@ -34,8 +42,7 @@ const Ecommerce = () => {
       setfilteredProduct(filteredItems);
     }
   };
-
-
+  //console.log(cartItem);
   const fetchProducts = async () => {
     const response = await axios.get("https://electronic-ecommerce.herokuapp.com/api/v1/product");
     if (response?.data && response.data.status === "success") {
@@ -47,9 +54,16 @@ const Ecommerce = () => {
   return (
     <>
       {filterModal ? <Filter filter={filter} filterModal={filterModal} setfilterModal={setfilterModal} /> : null}
-      {cartDisplay ? <Addtocart cartDisplay={cartDisplay} setCartDisplay={setCartDisplay} /> : null}
+      {cartDisplay ?<Addtocart 
+        cartDisplay={cartDisplay} 
+        setCartDisplay={setCartDisplay} 
+        cartItem={cartItem} 
+        setCartItem={setCartItem} 
+        DeleteCartItem={DeleteCartItem}
+        totalPrice={totalPrice}
+        setTotalPrice={setTotalPrice} /> : null}
       <Navbar setCartDisplay={setCartDisplay} />
-      <Body setfilterModal={setfilterModal} products={filteredProduct} />
+      <Body setfilterModal={setfilterModal} products={filteredProduct} cartItem={cartItem} setCartItem={setCartItem} />
     </>
   )
 }
