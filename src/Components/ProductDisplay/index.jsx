@@ -2,19 +2,19 @@ import React, { useState } from 'react'
 import { withCommas } from '../helper'
 import dayjs from 'dayjs';
 
-const ProductDisplay = ({ id,name, price, stock, image, release,cartItem,setCartItem }) => {
-  const [quantity,setQuantity]=useState(1);
+const ProductDisplay = ({ product,id,name, price, stock, image, release,cartItem,setCartItem }) => {
   const [itemStock,setItemStock]=useState(stock);
+
   const handleAddtoCart=()=>{
-    setCartItem([...cartItem,{id,name,price,stock,image,release,quantity}]);
-    console.log(cartItem);
-    /* cartItem.map((item)=>{
-      if (item.id!=id){
-        setCartItem([...cartItem,{id,name,price,stock,image,release,quantity}]);
-      }else{
-        console.log("already added to cart");
-      } 
-    })*/
+    let quantity=1;
+    let updated=[...cartItem];
+    let index=cartItem.findIndex((item)=>item.id===id);
+    if(index>-1){
+      updated[index].quantity=cartItem[index].quantity+1;
+    }else{
+      updated=[...cartItem,{id,name,price,stock,image,release,quantity}];
+    }
+    setCartItem(updated);
   }
   return (
     <>
@@ -31,21 +31,14 @@ const ProductDisplay = ({ id,name, price, stock, image, release,cartItem,setCart
               <div className='product-selector form-control' style={{ 'height': "100%", width:'25%', display: 'flex','padding':'0'}}>
                 <button 
                 style={{ 'border': 'none',background:'white',width:'30%'}} 
-                onClick={()=>{
-                setQuantity(quantity-1);
-                setItemStock(itemStock+1);
-                }}>-</button>
+                >-</button>
                 <input 
                 type="text" 
                 style={{'width':'40%',border:"none"}} 
-                value={quantity}
-                onChange={()=>{setQuantity(quantity-1);
-                setItemStock(itemStock+1)}}
-                min="0" max={itemStock}/>
+               />
                 <button 
                 style={{ 'border': 'none',background:'white',width:'30%'}} 
-                onClick={()=>{setQuantity(quantity+1);
-                setItemStock(itemStock-1)}}>+</button>
+                >+</button>
               </div>
               <div>
               <p className="product-name">{name}</p>

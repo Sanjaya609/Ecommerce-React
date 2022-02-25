@@ -3,14 +3,23 @@ import photo from '../../Resource/video.png'
 import { Modal, Container,Row,Col,Button } from 'react-bootstrap';
 //import { CartItem } from './CartItem';
 
-const Addtocart = ({ cartDisplay, setCartDisplay, cartItem, setCartItem, DeleteCartItem,totalPrice,setTotalPrice }) => {
+const Addtocart = ({ cartDisplay, setCartDisplay, cartItem, setCartItem, DeleteCartItem }) => {
   
+  const [totalPrice,setTotalPrice]=useState(0);
+
+  useEffect(()=>{
+    let added=0;
+    cartItem.forEach((item)=>{
+      let price=item.price.slice(1);
+      console.log(price);
+      added+=price*item.quantity;
+    });
+    setTotalPrice(added);
+  }
+  ,[cartItem]);
   const closeCartModal = () => {
     setCartDisplay(false);
   }
-  const Total= 
-  setTotalPrice()
-  // useEffect(() => <Container />, [cartItem]);
   return (
     <Modal show={cartDisplay} onHide={closeCartModal} aria-labelledby="contained-modal-title-vcenter" >
       <Modal.Header closeButton>
@@ -27,10 +36,10 @@ const Addtocart = ({ cartDisplay, setCartDisplay, cartItem, setCartItem, DeleteC
           : <span>Nothing in the cart!</span>}
           {console.log(cartItem)}
 
-        </Container>  
+        </Container>
       </Modal.Body>
       <Modal.Footer style={{ 'flexDirection': 'column' }}>
-        <p>Total Amount: <span>{totalPrice}</span> </p>
+        <p>Total Amount: <span>${totalPrice}</span> </p>
         <Button onClick={null}>Checkout</Button>
       </Modal.Footer>
     </Modal>

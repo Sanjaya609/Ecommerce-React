@@ -11,8 +11,8 @@
     } catch (error) {
       return "";
     }
-  };
-   */
+  }; */
+  
   export const withCommas = (numberToFormat) => {
     if (!numberToFormat) return "";
   

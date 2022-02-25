@@ -3,7 +3,7 @@ import { Offcanvas } from 'react-bootstrap';
 import dayjs from 'dayjs';
 
 const Filter = ({filterModal, setfilterModal,filter}) => {
-    const [ranges, setRanges] = React.useState({ priceMin: 0, priceMax: 0, dateMin:0, dateMax: dayjs(Date()).format("DD-MM-YYYY"),filterCategory:"default" });
+    const [ranges, setRanges] = React.useState({ priceMin: 0, priceMax: 0, dateMin:0, dateMax: dayjs(Date()),filterCategory:"default" });
     const handleFilter=()=>{
         filter({...ranges});
         closefilterModal();

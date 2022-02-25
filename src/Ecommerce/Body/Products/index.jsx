@@ -9,6 +9,7 @@ const Products = ({ products,cartItem,setCartItem}) => {
           <div className="row">
             {products.map((item) => (
               <ProductDisplay
+                product={item}
                 name={item.name}
                 price={item.price}
                 stock={item.stock}

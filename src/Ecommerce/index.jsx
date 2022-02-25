@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import axios from "axios";
 import Filter from '../Components/Filter';
 import Addtocart from '../Components/Addtocart';
+import { withCommas } from '../Components/helper'
 import dayjs from 'dayjs';
 
 const Ecommerce = () => {
@@ -22,20 +23,25 @@ const Ecommerce = () => {
     console.log(updatedCartItem);
     setCartItem(updatedCartItem);
   }
-  const filter = ({ priceMin, priceMax, filterCategory}) => {
+  const filter = ({priceMin, priceMax, filterCategory,dateMin,dateMax}) => {
     if (priceMin ===0 &&
         priceMax === 0 &&
-      filterCategory ==='default'){
+      filterCategory ==='default'/* &&
+      dateMin===0 */){
         setfilteredProduct(products);
     } else {
       const filteredItems = products.filter((product) => {
+        console.log( parseInt(product.price.slice(1)))
         let price = parseInt(product.price.slice(1));
         let category = product.category[1];
-        //let date=dayjs(product.date).format("DD-MM-YYYY");
-        //console.log(date);
-        //let minDate= dayjs(dateMin).format("DD-MM-YYYY");
-        console.log(category);
-        let valid = price >= priceMin && price <= priceMax || category === filterCategory/* ||date>=minDate&&date<=dateMax */;
+      /* 
+        let date=dayjs(product.date).format("DD-MM-YYYY");
+        let minDate= dayjs(dateMin).format("DD-MM-YYYY");
+        let maxDate=dateMax.format("DD-MM-YYYY"); 
+        console.log(minDate,date,dateMax);
+        console.log(minDate>date);
+        console.log(category);*/
+        let valid = price >= priceMin && price <= priceMax || category === filterCategory /* ||date>=minDate&&date<=maxDate */;
         console.log(priceMin, priceMax, filterCategory, price, valid);
         return valid;
       });
@@ -62,7 +68,7 @@ const Ecommerce = () => {
         DeleteCartItem={DeleteCartItem}
         totalPrice={totalPrice}
         setTotalPrice={setTotalPrice} /> : null}
-      <Navbar setCartDisplay={setCartDisplay} />
+      <Navbar setCartDisplay={setCartDisplay} Number={cartItem.length}/>
       <Body setfilterModal={setfilterModal} products={filteredProduct} cartItem={cartItem} setCartItem={setCartItem} />
     </>
   )
