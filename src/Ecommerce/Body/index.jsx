@@ -4,7 +4,7 @@ import Products from './Products'
 
 
 
-const Body = ({ products,setfilterModal,cartItem,setCartItem}) => {
+const Body = ({ products,setfilterModal,cartItem,setCartItem,setProductDetail}) => {
 
   const handleFilter = () => {
     setfilterModal(true);
@@ -25,7 +25,7 @@ const Body = ({ products,setfilterModal,cartItem,setCartItem}) => {
             </button>
           </div>
         </div>
-        <Products products={products} cartItem={cartItem} setCartItem={setCartItem} />
+        <Products products={products} cartItem={cartItem} setCartItem={setCartItem} setProductDetail={setProductDetail} />
       </div>
     </div>
   )

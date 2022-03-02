@@ -1,7 +1,7 @@
 import React from 'react'
 import ProductDisplay from '../../../Components/ProductDisplay'
 
-const Products = ({ products,cartItem,setCartItem}) => {
+const Products = ({ products,cartItem,setCartItem,setProductDetail}) => {
   return (
     <div className="products">
       <div className="wrapper">
@@ -18,7 +18,8 @@ const Products = ({ products,cartItem,setCartItem}) => {
                 key={item.id}
                 id={item.id} 
                 cartItem={cartItem} 
-                setCartItem={setCartItem}/>
+                setCartItem={setCartItem}
+                setProductDetail={setProductDetail}/>
             ))}
           </div>
 
