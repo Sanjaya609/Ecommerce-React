@@ -1,5 +1,4 @@
 import React from 'react'
-
 export const ProductDetail = ({ productDetail }) => {
   //console.log(productDetail,"PRODUCT DETAIl");
   return (

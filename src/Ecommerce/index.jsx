@@ -4,21 +4,20 @@ import Navbar from './Navbar'
 import axios from "axios";
 import Filter from '../Components/Filter';
 import Addtocart from '../Components/Addtocart';
-import { withCommas } from '../Components/helper'
+/* import { withCommas } from '../Components/helper'
 import dayjs from 'dayjs';
-import { increment,decrement} from '../Redux/action/counter';
-import { useDispatch,useSelector } from 'react-redux';
+import { increment,decrement} from '../Redux/action/counter'; */
+//import { useDispatch,useSelector } from 'react-redux';
 import { Route,Routes } from 'react-router-dom';
 import { ProductDetail } from '../Components/ProductDetail';
 
 const Ecommerce = (props) => {
-
+/* 
   var prod = useSelector((state)=>state);
   var counter = useSelector((state) => state.counter.count);
   const dispatch = useDispatch();
-
   console.log(prod,"Prod");
-  console.log(counter, "countercounter");
+  console.log(counter, "countercounter"); */
 
   const [filterModal, setfilterModal] = useState(false);
   const [cartDisplay, setCartDisplay] = useState(false);
